@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: fpl-analytics
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fpl_analytics
+    username: postgres
+    password: W0ryZ305/
+
+  jpa:
+    hibernate:
+      ddl-auto: update
