@@ -14,6 +14,7 @@ public class PlayerService {
     }
     
         public String findPlayer(String name){
-            return fplApiClient.getPlayerByName(name);
+            String json = fplApiClient.getRawData();
+            return "Response length: " + json.length();
     }
 }
