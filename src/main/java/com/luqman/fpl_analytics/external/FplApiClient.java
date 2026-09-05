@@ -16,6 +16,6 @@ public class FplApiClient {
         return restClient.get()
         .uri("https://fantasy.premierleague.com/api/bootstrap-static/")
         .retrieve()
-        .body(String.class);
+        .body(BootstrapResponse.class);
     }
 }
