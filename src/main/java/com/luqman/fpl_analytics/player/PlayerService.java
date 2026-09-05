@@ -20,7 +20,7 @@ public class PlayerService {
                 fplApiClient.getBootstrapData();
 
             return response.getElements()
-                .get(0)
-                .getWeb_name();
+                .get(0) // Get first player
+                .getWeb_name(); // Get player name
     }
 }
