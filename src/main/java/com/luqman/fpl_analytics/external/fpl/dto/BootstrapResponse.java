@@ -8,7 +8,7 @@ import java.util.List;
 @Setter 
 public class BootstrapResponse {
 
-    private List<PlayerDTO> elements;
+    private List<PlayerDto> elements;
 
 
 }
