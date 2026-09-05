@@ -2,9 +2,13 @@ package com.luqman.fpl_analytics.external.fpl.dto;
 
 import lombok.Setter;
 import lombok.Getter;
+import java.util.List;
 
-@Setter 
 @Getter
+@Setter 
 public class BootstrapResponse {
-    
+
+    private List<PlayerDTO> elements;
+
+
 }
