@@ -22,9 +22,9 @@ public class PlayerController {
         @RequestParam String name,
         Model model) {
 
-        String playerName = playerService.findPlayer(name);
+        String player = playerService.findPlayer(name);
 
-        model.addAttribute("playerName", playerName);
+        model.addAttribute("player", player);
 
         return "player/details";
     }
