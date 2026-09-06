@@ -10,19 +10,43 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1 class="text-5xl font-bold text-gray-700 h-64 flex items-center justify-center">Welcome to FPL Analytics</h1>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
-     <!-- SEARCH BAR – ready to be enhanced with CSS-->
+    <div class="bg-white text-gray-500 max-w-md w-full mx-4 md:p-8 p-6 text-left rounded-xl shadow-lg">
 
-    <div class="flex items-center border pl-4 gap-2 border-gray-500/30 h-[46px] rounded-full overflow-hidden max-w-md mx-auto">
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 30 30" fill="#6B7280">
-        <path d="M13 3C7.489 3 3 7.489 3 13s4.489 10 10 10a9.95 9.95 0 0 0 6.322-2.264l5.971 5.971a1 1 0 1 0 1.414-1.414l-5.97-5.97A9.95 9.95 0 0 0 23 13c0-5.511-4.489-10-10-10m0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8-8-3.57-8-8 3.57-8 8-8"/>
-    </svg>
-    <input type="text" placeholder="Search a player" class="w-full h-full outline-none text-gray-500 bg-transparent placeholder-gray-500 text-sm">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">
+            FPL Analytics
+        </h1>
+
+        <p class="text-center text-gray-500 mb-8">
+            Search for any Premier League player
+        </p>
+
+        <form action="/player" method="get">
+
+            <label for="name" class="block mb-2 font-medium text-gray-700">
+                Player Name
+            </label>
+
+            <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="e.g. Saka, Palmer, Haaland"
+                class="w-full border border-gray-300 focus:border-indigo-500 outline-none rounded-lg py-3 px-4">
+
+            <button
+                type="submit"
+                class="w-full mt-5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition py-3 rounded-lg text-white font-medium">
+
+                Search Player
+
+            </button>
+
+        </form>
+
+
     </div>
 
-     
-    
 </body>
 </html>

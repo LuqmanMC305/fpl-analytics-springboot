@@ -11,15 +11,15 @@ public class PlayerDto {
     private Integer id;
 
     @JsonProperty("web_name")
-    private String web_name;
+    private String webName;
 
     private Integer team;
 
     @JsonProperty("now_cost")
-    private Integer now_cost;
+    private Integer nowCost;
 
     @JsonProperty("total_points")
-    private Integer total_points;
+    private Integer totalPoints;
 
 
 }

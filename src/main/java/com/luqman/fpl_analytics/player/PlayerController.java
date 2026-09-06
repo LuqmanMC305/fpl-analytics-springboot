@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.luqman.fpl_analytics.external.fpl.dto.PlayerDto;
+
 
 @Controller
 @RequestMapping("/player")
@@ -22,7 +24,7 @@ public class PlayerController {
         @RequestParam String name,
         Model model) {
 
-        String player = playerService.findPlayer(name);
+        PlayerDto player = playerService.findPlayer(name);
 
         model.addAttribute("player", player);
 

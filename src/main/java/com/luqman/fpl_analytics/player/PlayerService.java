@@ -15,20 +15,19 @@ public class PlayerService {
         this.fplApiClient = fplApiClient;
     }
     
-        public String findPlayer(String name){
+        public PlayerDto findPlayer(String name){
 
             BootstrapResponse response = 
                 fplApiClient.getBootstrapData();
 
-            PlayerDto player = response.getElements()
+            return response.getElements()
                 .stream()
                 .filter(p ->
-                        p.getWeb_name()
+                        p.getWebName()
                             .equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
 
-            return player == null ? "Not Found" : player.getWeb_name();
 
     }
 }
