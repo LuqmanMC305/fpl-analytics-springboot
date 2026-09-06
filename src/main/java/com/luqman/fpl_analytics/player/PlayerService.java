@@ -17,8 +17,16 @@ public class PlayerService {
     
         public PlayerDto findPlayer(String name){
 
+            if(name == null || name.isBlank()){
+                return null;
+            }
+
             BootstrapResponse response = 
                 fplApiClient.getBootstrapData();
+
+            if (response == null || response.getElements() == null){
+                return null;
+            }
 
             return response.getElements()
                 .stream()
