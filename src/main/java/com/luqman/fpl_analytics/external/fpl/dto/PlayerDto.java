@@ -21,5 +21,18 @@ public class PlayerDto {
     @JsonProperty("total_points")
     private Integer totalPoints;
 
+    @JsonProperty ("goals_scored")
+    private Integer goalsScored;
+
+    @JsonProperty("assists")
+    private Integer assists;
+
+    @JsonProperty ("selected_by_percent")
+    private String selectedByPercent;
+
+    @JsonProperty("form")
+    private String form;
+
+
 
 }
