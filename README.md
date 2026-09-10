@@ -192,7 +192,7 @@ This project is being used to practise:
 ### Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/LuqmanMC305/fpl-analytics-springboot.git
 ```
 
 ### Run PostgreSQL
