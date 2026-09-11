@@ -20,9 +20,19 @@ public class Player{
 
     private Long id;
 
-    private String name;
+    private String webName;
+
     private String team;
+
     private String position;
+
+    private Integer totalPoints;
+
+    private Integer nowCost;
+
+    private Integer goalsScored;
+
+    private Integer assists;
 
 
 }
