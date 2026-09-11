@@ -1,3 +1,7 @@
+/**
+ * Player Entity
+ * 
+ */
 package com.luqman.fpl_analytics.player;
 
 import jakarta.persistence.*;
