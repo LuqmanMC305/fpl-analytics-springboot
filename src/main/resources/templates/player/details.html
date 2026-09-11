@@ -18,9 +18,16 @@
         <!-- Player Details -->
         <div th:if="${player}" class="mt-8 border-t pt-6 text-center">
 
+            
             <h2 class="text-2xl font-bold text-gray-800 text-center"
                 th:text="${player.webName}">
             </h2>
+
+            <!-- Player Club; converted from id
+             <h4 class="text-lg font-bold text-gray-800 text-center"
+                th:text="${player.team}">
+            </h4>
+            -->
 
             <p class="mt-2 text-center">
                 Points:
@@ -30,6 +37,16 @@
             <p>
                 Price:
                 £<span th:text="${player.nowCost / 10.0}"></span>m
+            </p>
+
+             <p>
+                Goals Scored This Season:
+                <span th:text="${player.goalsScored}"></span>
+            </p>
+
+            <p>
+                Assist This Season:
+                <span th:text="${player.assists}"></span>
             </p>
 
         </div>
