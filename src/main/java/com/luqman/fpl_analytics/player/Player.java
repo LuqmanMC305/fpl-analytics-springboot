@@ -22,7 +22,7 @@ public class Player{
 
     private String webName;
 
-    private String team;
+    private String teamName;
 
     private String position;
 
