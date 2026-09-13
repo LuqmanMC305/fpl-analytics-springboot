@@ -31,7 +31,7 @@ public class PlayerService {
             }
 
             // Temporarily ensure the team is populated
-            System.out.println(response.getTeams().size());
+            System.out.println("Total Teams " + response.getTeams().size());
 
             return response.getElements()
                 .stream()
