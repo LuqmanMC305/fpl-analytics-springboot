@@ -1,4 +1,4 @@
-package com.luqman.fpl_analytics.player.dto;
+package com.luqman.fpl_analytics.external.fpl.dto;
 
 import lombok.Data;
 

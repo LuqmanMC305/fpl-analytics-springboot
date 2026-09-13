@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.luqman.fpl_analytics.external.FplApiClient;
 import com.luqman.fpl_analytics.external.fpl.dto.BootstrapResponse;
 import com.luqman.fpl_analytics.external.fpl.dto.PlayerDto;
+import com.luqman.fpl_analytics.external.fpl.dto.TeamDto;
+
 
 @Service
 public class PlayerService {
@@ -27,6 +29,9 @@ public class PlayerService {
             if (response == null || response.getElements() == null){
                 return null;
             }
+
+            // Temporarily ensure the team is populated
+            System.out.println(response.getTeams().size());
 
             return response.getElements()
                 .stream()
