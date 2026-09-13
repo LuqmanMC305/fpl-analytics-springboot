@@ -16,5 +16,7 @@ public class BootstrapResponse {
 
     private List<PlayerDto> elements;
 
+     private List<TeamDto> teams;
+
 
 }
