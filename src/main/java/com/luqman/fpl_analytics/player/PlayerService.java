@@ -7,6 +7,9 @@ import com.luqman.fpl_analytics.external.fpl.dto.BootstrapResponse;
 import com.luqman.fpl_analytics.external.fpl.dto.PlayerDto;
 import com.luqman.fpl_analytics.external.fpl.dto.TeamDto;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 
 @Service
 public class PlayerService {
@@ -30,8 +33,23 @@ public class PlayerService {
                 return null;
             }
 
-            // Temporarily ensure the team is populated
+
+
+            /* Temporarily ensure the team is populated
+            for(TeamDto team : response.getTeams())
+                System.out.println(team.getId() + " - " + team.getName());
+           
             System.out.println("Total Teams " + response.getTeams().size());
+           */ 
+
+           // Convert team list into a map for fast team ID -> team name lookup.
+           Map<Integer, String> teamMap = 
+                response.getTeams()
+                        .stream()
+                        .collect(Collectors.toMap(TeamDto::getId, TeamDto::getName));
+            
+            System.out.println(teamMap.get(1));
+            
 
             return response.getElements()
                 .stream()
