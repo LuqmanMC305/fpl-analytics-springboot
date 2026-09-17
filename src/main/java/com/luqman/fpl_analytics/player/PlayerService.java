@@ -46,7 +46,11 @@ public class PlayerService {
            Map<Integer, String> teamMap = 
                 response.getTeams()
                         .stream()
-                        .collect(Collectors.toMap(TeamDto::getId, TeamDto::getName));
+                        .collect(Collectors.toMap(
+                            TeamDto::getId, 
+                            TeamDto::getName,
+                            (oldValue, newValue) -> oldValue // prevents duplicates, using parameter names of lambda expression
+                        ));
             
             System.out.println(teamMap.get(1));
             
