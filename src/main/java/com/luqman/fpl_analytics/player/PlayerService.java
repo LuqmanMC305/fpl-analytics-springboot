@@ -33,16 +33,7 @@ public class PlayerService {
                 return null;
             }
 
-
-
-            /* Temporarily ensure the team is populated
-            for(TeamDto team : response.getTeams())
-                System.out.println(team.getId() + " - " + team.getName());
-           
-            System.out.println("Total Teams " + response.getTeams().size());
-           */ 
-
-           // Convert team list into a map for fast team ID -> team name lookup.
+             // Convert team list into a map for fast team ID -> team name lookup.
            Map<Integer, String> teamMap = 
                 response.getTeams()
                         .stream()
@@ -51,18 +42,20 @@ public class PlayerService {
                             TeamDto::getName,
                             (oldValue, newValue) -> oldValue // prevents duplicates, using parameter names of lambda expression
                         ));
-            
-            System.out.println(teamMap.get(1));
-            
 
-            return response.getElements()
+             PlayerDto player = response.getElements()
                 .stream()
-                .filter(p ->
+                .filter(p -> 
                         p.getWebName()
                             .equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
+            
+            if (player != null){
+                player.setTeamName(
+                    teamMap.get(player.getTeam()));
+            }
 
-
+            return player;
     }
 }

@@ -15,6 +15,9 @@ public class PlayerDto {
 
     private Integer team;
 
+    @JsonProperty ("team_name")
+    private String teamName;
+
     @JsonProperty("now_cost")
     private Integer nowCost;
 
