@@ -43,17 +43,19 @@ public class PlayerService {
                             (oldValue, newValue) -> oldValue // prevents duplicates, using parameter names of lambda expression
                         ));
 
-             PlayerDto player = response.getElements()
+            // Search the matching player from whole list
+             PlayerDto player = response.getElements() 
                 .stream()
                 .filter(p -> 
                         p.getWebName()
                             .equalsIgnoreCase(name))
-                .findFirst()
+                .findFirst() // Return first match
                 .orElse(null);
             
+            // Get player's team ID
             if (player != null){
                 player.setTeamName(
-                    teamMap.get(player.getTeam()));
+                    teamMap.get(player.getTeam())); // Find the team's name from map
             }
 
             return player;
