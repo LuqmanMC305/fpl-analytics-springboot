@@ -36,7 +36,7 @@ public class PlayerController {
         PlayerDto player = playerService.findPlayer(name);
         log.info("Search for player: {}", name);
 
-        // Logging for finding player
+        // Use logging when finding player
         if(name == null || name.isBlank()){
             log.warn("\"Player search attempted with empty name");
             return null;
