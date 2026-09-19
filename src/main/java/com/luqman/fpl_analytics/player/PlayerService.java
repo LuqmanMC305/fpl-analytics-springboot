@@ -1,5 +1,11 @@
 package com.luqman.fpl_analytics.player;
 
+/**
+ * Service layer for player-related operations.
+ * Retrieves FPL player data, performs player searches,
+ * and prepares player information for presentation.
+ */
+
 import org.springframework.stereotype.Service;
 
 import com.luqman.fpl_analytics.external.FplApiClient;
