@@ -21,6 +21,9 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
+    private static final Logger log = 
+        LoggerFactory.getLogger(PlayerService.class);
+
      public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }
@@ -31,6 +34,16 @@ public class PlayerController {
         Model model) {
 
         PlayerDto player = playerService.findPlayer(name);
+        log.info("Search for player: {}", name);
+
+        // Logging for finding player
+        if(name == null || name.isBlank()){
+            log.warn("\"Player search attempted with empty name");
+            return null;
+        }
+        else{
+            log.info("Player found: {}", player.getWebName());
+        }
 
         model.addAttribute("player", player);
 
