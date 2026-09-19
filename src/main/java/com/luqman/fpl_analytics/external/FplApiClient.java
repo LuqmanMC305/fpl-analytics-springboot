@@ -1,5 +1,11 @@
 package com.luqman.fpl_analytics.external;
 
+/**
+ * Handles communication with the FPL API.
+ * Retrieves raw player and team data and converts the API response
+ * into application DTOs for further processing.
+ */
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 

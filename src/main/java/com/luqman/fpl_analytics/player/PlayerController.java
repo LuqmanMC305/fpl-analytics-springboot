@@ -1,9 +1,9 @@
 package com.luqman.fpl_analytics.player;
 
 /**
- * Handles communication with the FPL API.
- * Retrieves raw player and team data and converts the API response
- * into application DTOs for further processing.
+ * Handles player-related web requests.
+ * Receives user search input, delegates processing to the service layer,
+ * and returns player data to Thymeleaf views.
  */
 
 import org.springframework.stereotype.Controller;
