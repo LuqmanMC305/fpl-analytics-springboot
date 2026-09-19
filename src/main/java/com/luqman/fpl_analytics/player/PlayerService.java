@@ -33,6 +33,10 @@ public class PlayerService {
                 return null;
             }
 
+            if(response.getTeams() == null){
+                return null;
+            }
+
              // Convert team list into a map for fast team ID -> team name lookup.
            Map<Integer, String> teamMap = 
                 response.getTeams()
