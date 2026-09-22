@@ -1,6 +1,7 @@
 package com.luqman.fpl_analytics.player;
 
 /**
+ * HANDLES HTTP/UI concerns
  * Handles player-related web requests.
  * Receives user search input, delegates processing to the service layer,
  * and returns player data to Thymeleaf views.
@@ -36,16 +37,13 @@ public class PlayerController {
         PlayerDto player = playerService.findPlayer(name);
         log.info("Search for player: {}", name);
 
-        // Use logging when finding player
-        if(name == null || name.isBlank()){
-            log.warn("\"Player search attempted with empty name");
-            return null;
+        if(player == null){
+            model.addAttribute( // Pass error message to Thymeleaf view.
+                "error", 
+                "Player not found." );     
+        } else{
+            model.addAttribute("player", player); 
         }
-        else{
-            log.info("Player found: {}", player.getWebName());
-        }
-
-        model.addAttribute("player", player);
 
         return "player/details";
     }
