@@ -15,6 +15,9 @@
             Player Details
         </h1>
 
+        <!-- Error Message -->
+        <div th:if="${error}" class="mt-4 text-center text-red-600 font-semibold" th:text="${error}"></div>
+
         <!-- Player Details -->
         <div th:if="${player}" class="mt-8 border-t pt-6 text-center">
 
