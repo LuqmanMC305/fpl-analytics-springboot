@@ -16,9 +16,11 @@
         </h1>
 
         <!-- Error Message -->
-        <div th:if="${error}" 
-            class="mt-4 text-center text-red-600 font-bold"
-            th:text="'Error: ' + ${error}">
+        <div th:if="${playerNotFoundMsg}" 
+            class="mt-4 text-center text-red-600 font-bold">
+            Error:
+            Player '<span th:text="${playerName}"></span>'
+            <span th:text="${playerNotFoundMsg}"></span>
         </div>
 
         <!-- Player Details -->

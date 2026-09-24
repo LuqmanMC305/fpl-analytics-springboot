@@ -39,8 +39,13 @@ public class PlayerController {
 
         if(player == null){
             model.addAttribute( // Pass error message to Thymeleaf view. (key, val)
-                "error",
-                "Player not found." );     
+                "playerNotFoundMsg",
+                "is not found");
+            
+            model.addAttribute(
+                "playerName",
+                name);
+
         } else{
             model.addAttribute("player", player); 
         }
