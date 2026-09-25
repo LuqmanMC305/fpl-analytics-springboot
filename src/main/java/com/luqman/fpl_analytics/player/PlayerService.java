@@ -21,10 +21,12 @@ import java.util.stream.Collectors;
 @Service
 public class PlayerService {
 
+       private final PlayerRepository playerRepository;
        private final FplApiClient fplApiClient;
 
-       public PlayerService(FplApiClient fplApiClient) {
+       public PlayerService(FplApiClient fplApiClient, PlayerRepository playerRepository) {
         this.fplApiClient = fplApiClient;
+        this.playerRepository = playerRepository;
     }
     
         public PlayerDto findPlayer(String name){
