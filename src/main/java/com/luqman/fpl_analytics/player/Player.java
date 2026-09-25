@@ -1,6 +1,6 @@
 /**
  * Player Entity
- * 
+ * Describe What a Player Is
  */
 package com.luqman.fpl_analytics.player;
 
