@@ -1,3 +1,8 @@
+/**
+ * Represents single FPL player returned by the Fantasy Premier League API.
+ * Contains the core player metadata and performance fields used by the app UI.
+ */
+
 package com.luqman.fpl_analytics.external.fpl.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
