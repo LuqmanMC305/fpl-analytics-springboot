@@ -20,7 +20,7 @@ public class Player{
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private long fplId;
+    private Integer fplId;
 
     private String webName;
 

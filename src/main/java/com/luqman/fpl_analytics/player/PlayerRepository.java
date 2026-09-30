@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface PlayerRepository 
     extends JpaRepository<Player, Long> {
         //Finds a player using their ID from FPL API
-        Optional<Player> findByFplId(Long fplId);
+        Optional<Player> findByFplId(Integer fplId);
 }

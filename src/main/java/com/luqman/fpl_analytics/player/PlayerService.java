@@ -71,6 +71,21 @@ public class PlayerService {
                     teamMap.get(player.getTeam())); // Find the team's name from map
             }
 
+            // Save the player's latest data to db
+            Player entity = playerRepository.findByFplId(player.getId())
+                .orElseGet(Player::new);
+
+            entity.setFplId(player.getId());
+            entity.setWebName(player.getWebName());
+            entity.setTeamName(player.getTeamName());
+            //entity.setPosition(player.getPosition());
+            entity.setTotalPoints(player.getTotalPoints());
+            entity.setNowCost(player.getNowCost());
+            entity.setGoalsScored(player.getGoalsScored());
+            entity.setAssists(player.getAssists());
+
+            playerRepository.save(entity);
+
             return player;
     }
 }
