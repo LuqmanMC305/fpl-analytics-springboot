@@ -13,6 +13,8 @@ import com.luqman.fpl_analytics.external.FplApiClient;
 import com.luqman.fpl_analytics.external.fpl.dto.BootstrapResponse;
 import com.luqman.fpl_analytics.external.fpl.dto.PlayerDto;
 import com.luqman.fpl_analytics.external.fpl.dto.TeamDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,6 +25,9 @@ public class PlayerService {
 
        private final PlayerRepository playerRepository;
        private final FplApiClient fplApiClient;
+
+        private static final Logger log = 
+            LoggerFactory.getLogger(PlayerService.class);
 
        public PlayerService(FplApiClient fplApiClient, PlayerRepository playerRepository) {
         this.fplApiClient = fplApiClient;
@@ -84,7 +89,9 @@ public class PlayerService {
             entity.setGoalsScored(player.getGoalsScored());
             entity.setAssists(player.getAssists());
 
-            playerRepository.save(entity);
+            Player savedPlayer = playerRepository.save(entity);
+            log.info("Saved Player '{}' with FPL ID: {}", 
+                savedPlayer.getWebName(), savedPlayer.getFplId());
 
             return player;
     }
