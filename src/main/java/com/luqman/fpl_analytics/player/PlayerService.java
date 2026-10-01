@@ -70,11 +70,14 @@ public class PlayerService {
                 .findFirst() // Return first match
                 .orElse(null);
             
+            if(player == null){
+                return null;
+            }
+            
             // Get player's team ID
-            if (player != null){
                 player.setTeamName(
                     teamMap.get(player.getTeam())); // Find the team's name from map
-            }
+            
 
             // Save the player's latest data to db
             Player entity = playerRepository.findByFplId(player.getId())
