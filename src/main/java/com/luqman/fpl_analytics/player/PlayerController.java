@@ -46,6 +46,8 @@ public class PlayerController {
                 "playerName",
                 name);
 
+            log.warn("Player '{}' not found, returning empty result", name);
+
         } else{
             model.addAttribute("player", player); 
         }
