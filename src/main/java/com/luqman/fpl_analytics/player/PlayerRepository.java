@@ -14,4 +14,6 @@ public interface PlayerRepository
     extends JpaRepository<Player, Long> {
         //Finds a player using their ID from FPL API
         Optional<Player> findByFplId(Integer fplId);
+
+        Optional<Player> findFirstByWebNameIgnoreCase(String webName);
 }
