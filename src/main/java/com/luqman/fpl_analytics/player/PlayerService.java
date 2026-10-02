@@ -13,6 +13,7 @@ import com.luqman.fpl_analytics.external.FplApiClient;
 import com.luqman.fpl_analytics.external.fpl.dto.BootstrapResponse;
 import com.luqman.fpl_analytics.external.fpl.dto.PlayerDto;
 import com.luqman.fpl_analytics.external.fpl.dto.TeamDto;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +40,17 @@ public class PlayerService {
             if(name == null || name.isBlank()){
                 return null;
             }
+
+            // Find if the player already exists in DB (cached player)
+            Optional<Player> cachedPlayer = 
+                playerRepository.findFirstByWebNameIgnoreCase(name);
+
+            /* WILL BE IMPLEMENTED IF toPlayerDto method is implemented
+            if(cachedPlayer.isPresent())
+            {
+                return toPlayerDto(cachedPlayer.get());
+            }
+             */
 
             BootstrapResponse response = 
                 fplApiClient.getBootstrapData();
