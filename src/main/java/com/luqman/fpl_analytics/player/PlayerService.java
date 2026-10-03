@@ -45,13 +45,17 @@ public class PlayerService {
             Optional<Player> cachedPlayer = 
                 playerRepository.findFirstByWebNameIgnoreCase(name);
 
-            /* WILL BE IMPLEMENTED IF toPlayerDto method is implemented
+            // Call a helper function to convert from Player to PlayerDTO
             if(cachedPlayer.isPresent())
             {
+                 log.info("Player '{}' found in cache! ", name);
+                    
                 return toPlayerDto(cachedPlayer.get());
             }
-             */
-
+            else{
+                log.info("Player '{}' not found in cache! ", name);
+            }
+        
             BootstrapResponse response = 
                 fplApiClient.getBootstrapData();
 
@@ -109,5 +113,20 @@ public class PlayerService {
                 savedPlayer.getWebName(), savedPlayer.getFplId());
 
             return player;
+    }
+
+    private PlayerDto toPlayerDto(Player player){
+        PlayerDto dto = new PlayerDto();
+
+        dto.setWebName(player.getWebName());
+        dto.setTeamName(player.getTeamName());
+        dto.setTotalPoints(player.getTotalPoints());
+        dto.setTotalPoints(player.getTotalPoints());
+        dto.setNowCost(player.getNowCost());
+        dto.setGoalsScored(player.getGoalsScored());
+        dto.setAssists(player.getAssists());
+
+
+        return dto;
     }
 }
