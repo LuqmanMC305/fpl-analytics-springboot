@@ -30,7 +30,7 @@
 
             <input
                 id="name"
-                name="name"
+                name="name" required oninvalid="this.setCustomValidity('Please enter a player name!')" oninput="this.setCustomValidity('')"
                 type="text"
                 placeholder="e.g. Saka, Palmer, Haaland"
                 class="w-full border border-gray-300 focus:border-indigo-500 outline-none rounded-lg py-3 px-4">
