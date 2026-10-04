@@ -5,6 +5,7 @@
     font-style: normal;
 }
 
-body{
+.fpl-analytics-header{
     font-family: Premier Sans, sans-serif;
+    font-size: 48px;
 }
