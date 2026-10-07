@@ -9,9 +9,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white text-gray-500 max-w-md w-full mx-4 md:p-8 p-6 text-left rounded-xl shadow-lg">
+    <div class="bg-[#28002b] text-gray-500 max-w-md w-full mx-4 md:p-8 p-6 text-left rounded-xl shadow-lg">
 
-        <h1 class="text-5xl font-bold mb-6 flex items-center justify-center player-details-text">
+        <h1 class="text-5xl text-white font-bold mb-6 flex items-center justify-center player-details-text">
             Player Details
         </h1>
 
@@ -26,33 +26,35 @@
         <!-- Player Details -->
         <div th:if="${player}" class="mt-8 border-t pt-6 text-center">
 
-            <h2 class="text-2xl font-bold text-gray-800 text-center"
+            <h2 class="text-2xl font-bold text-white text-center"
                 th:text="${player.webName}">
             </h2>
 
-             <h4 class="text-lg font-bold mt-2 text-gray-800 text-center"
+             <h4 class="text-lg font-bold mt-2 text-white text-center"
                 th:text="${player.teamName}">
             </h4>
+            
+            <div class="player-detail-metrics">
+                <p class="mt-2 text-center">
+                    Points:
+                    <span th:text="${player.totalPoints}"></span>
+                </p>
 
-            <p class="mt-2 text-center">
-                Points:
-                <span th:text="${player.totalPoints}"></span>
-            </p>
+                <p>
+                    Price:
+                    £<span th:text="${player.nowCost / 10.0}"></span>m
+                </p>
 
-            <p>
-                Price:
-                £<span th:text="${player.nowCost / 10.0}"></span>m
-            </p>
+                <p>
+                    Goals Scored This Season:
+                    <span th:text="${player.goalsScored}"></span>
+                </p>
 
-             <p>
-                Goals Scored This Season:
-                <span th:text="${player.goalsScored}"></span>
-            </p>
-
-            <p>
-                Assist This Season:
-                <span th:text="${player.assists}"></span>
-            </p>
+                <p>
+                    Assist This Season:
+                    <span th:text="${player.assists}"></span>
+                </p>
+            </div>
 
         </div>
 

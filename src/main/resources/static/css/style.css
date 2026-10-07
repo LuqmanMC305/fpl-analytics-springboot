@@ -13,5 +13,8 @@
 
 .player-details-text{
     font-family: Premier Sans, sans-serif;
-    color: #28002b;
+}
+
+.player-detail-metrics{
+    color: white;
 }
