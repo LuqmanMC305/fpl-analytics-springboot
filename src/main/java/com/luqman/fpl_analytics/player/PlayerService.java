@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import java.math.BigDecimal;
+
 
 @Service
 public class PlayerService {
@@ -107,6 +109,11 @@ public class PlayerService {
             entity.setNowCost(player.getNowCost());
             entity.setGoalsScored(player.getGoalsScored());
             entity.setAssists(player.getAssists());
+            entity.setSelectedByPercent(
+                player.getSelectedByPercent() == null
+                ? null
+                : new BigDecimal(player.getSelectedByPercent())
+            );
 
             Player savedPlayer = playerRepository.save(entity);
             log.info("Saved Player '{}' with FPL ID: {}", 
