@@ -133,7 +133,7 @@ public class PlayerService {
         dto.setGoalsScored(player.getGoalsScored());
         dto.setAssists(player.getAssists());
         // WILL CONVERT THIS TO STRING
-        //dto.setSelectedByPercent(player.getSelectedByPercent());
+        dto.setSelectedByPercent(String.valueOf(player.getSelectedByPercent()));
 
 
         return dto;
