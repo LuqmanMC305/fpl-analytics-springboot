@@ -47,7 +47,17 @@ public class PlayerService {
             Optional<Player> cachedPlayer = 
                 playerRepository.findFirstByWebNameIgnoreCase(name);
 
-            // Call a helper function to convert from Player to PlayerDTO
+            
+            /* Call a helper function to convert from Player to PlayerDTO
+                
+                NEW cachedPlayer CONDITIONS:
+                 if (cached.isPresent()
+                        && isFresh(cached.get())
+                        && cached.get().getSelectedByPercent() != null) {
+                    return toPlayerDto(cached.get());
+                }
+
+            */
             if(cachedPlayer.isPresent())
             {
                  log.info("Player '{}' found in cache! ", name);
@@ -57,6 +67,11 @@ public class PlayerService {
             else{
                 log.info("Player '{}' not found in cache! ", name);
             }
+
+            /*
+            MISSING OR STALE PLAYER ATTRIBUTE DATA
+            FETCH FROM API -> UPDATE & SAVE THE ENTITY -> RETURN API RESULT
+            */
         
             BootstrapResponse response = 
                 fplApiClient.getBootstrapData();
@@ -96,6 +111,7 @@ public class PlayerService {
                 player.setTeamName(
                     teamMap.get(player.getTeam())); // Find the team's name from map
             
+            
 
             // Save the player's latest data to db
             Player entity = playerRepository.findByFplId(player.getId())
@@ -122,6 +138,7 @@ public class PlayerService {
             return player;
     }
 
+    // Helper method to convert from Player to PlayerDTO
     private PlayerDto toPlayerDto(Player player){
         PlayerDto dto = new PlayerDto();
 
@@ -137,5 +154,10 @@ public class PlayerService {
 
 
         return dto;
+    }
+
+    // Helper method to refresh & save player
+    private Player refreshAndSavePlayer(PlayerDto dto){
+
     }
 }
