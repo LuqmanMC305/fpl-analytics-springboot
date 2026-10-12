@@ -112,6 +112,7 @@ public class PlayerService {
             entity.setGoalsScored(dto.getGoalsScored());
             entity.setAssists(dto.getAssists());
             entity.setSelectedByPercent(new BigDecimal(dto.getSelectedByPercent()));
+            entity.setLastUpdated(LocalDateTime.now());
             /*
                 FOR FUTURE PLAYER FIELDS
                 entity.setPosition(player.getPosition());
