@@ -49,17 +49,7 @@ public class PlayerService {
             Optional<Player> cachedPlayer = 
                 playerRepository.findFirstByWebNameIgnoreCase(name);
 
-            
-            /* Call a helper function to convert from Player to PlayerDTO
-                
-                NEW cachedPlayer CONDITIONS:
-                 if (cached.isPresent()
-                        && isFresh(cached.get())
-                        && cached.get().getSelectedByPercent() != null) {
-                    return toPlayerDto(cached.get());
-                }
 
-            */
             if(cachedPlayer.isPresent())
             {
                 log.info("Player '{}' found in cache! ", name);
@@ -82,48 +72,12 @@ public class PlayerService {
             MISSING OR STALE PLAYER ATTRIBUTE DATA
             FETCH FROM API -> UPDATE & SAVE THE ENTITY -> RETURN API RESULT
             */
-        
-            BootstrapResponse response = 
-                fplApiClient.getBootstrapData();
 
-            if (response == null || response.getElements() == null){
-                return null;
-            }
-
-            if(response.getTeams() == null){
-                return null;
-            }
-
-             // Convert team list into a map for fast team ID -> team name lookup.
-           Map<Integer, String> teamMap = 
-                response.getTeams()
-                        .stream()
-                        .collect(Collectors.toMap(
-                            TeamDto::getId, 
-                            TeamDto::getName,
-                            (oldValue, newValue) -> oldValue // prevents duplicates, using parameter names of lambda expression
-                        ));
-
-            // Search the matching player from whole list
-             PlayerDto player = response.getElements() 
-                .stream()
-                .filter(p -> 
-                        p.getWebName()
-                            .equalsIgnoreCase(name))
-                .findFirst() // Return first match
-                .orElse(null);
-            
-            if(player == null){
-                return null;
-            }
-            
-            // Get player's team ID
-                player.setTeamName(
-                    teamMap.get(player.getTeam())); // Find the team's name from map
-            
+            PlayerDto player = findPlayerInApi(name);
+            if (player == null) return null;
             
 
-            // Save the player's latest data to db
+            // MOVE THIS TO HELPER FUNCTION: refreshAndSavePlayer
             Player entity = playerRepository.findByFplId(player.getId())
                 .orElseGet(Player::new);
 
@@ -166,11 +120,54 @@ public class PlayerService {
         return dto;
     }
 
-    // Helper method to refresh & save player
+    // Helper method to refresh & save player to DB
     private Player refreshAndSavePlayer(PlayerDto dto){
 
     }
 
+    private PlayerDto findPlayerInApi(String name){
+           BootstrapResponse response = 
+                fplApiClient.getBootstrapData();
+
+            if (response == null || response.getElements() == null){
+                return null;
+            }
+
+            if(response.getTeams() == null){
+                return null;
+            }
+
+             // Convert team list into a map for fast team ID -> team name lookup.
+           Map<Integer, String> teamMap = 
+                response.getTeams()
+                        .stream()
+                        .collect(Collectors.toMap(
+                            TeamDto::getId, 
+                            TeamDto::getName,
+                            (oldValue, newValue) -> oldValue // prevents duplicates, using parameter names of lambda expression
+                        ));
+
+            // Search the matching player from whole list
+             PlayerDto player = response.getElements() 
+                .stream()
+                .filter(p -> 
+                        p.getWebName()
+                            .equalsIgnoreCase(name))
+                .findFirst() // Return first match
+                .orElse(null);
+            
+            if(player == null){
+                return null;
+            }
+            
+            // Get player's team ID
+                player.setTeamName(
+                    teamMap.get(player.getTeam())); // Find the team's name from map
+            
+            return player;
+    }
+
+    // Helper method to determine if the player data is outdated
     private boolean isPlayerDataStale(Player player){
         LocalDateTime cutOffTime = LocalDateTime.now().minusHours(6);
         return (player.getLastUpdated() == null || player.getLastUpdated().isBefore(cutOffTime));
