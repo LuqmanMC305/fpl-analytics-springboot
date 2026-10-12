@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Service
@@ -158,6 +160,12 @@ public class PlayerService {
 
     // Helper method to refresh & save player
     private Player refreshAndSavePlayer(PlayerDto dto){
+
+    }
+
+    private boolean isPlayerDataStale(Player player){
+        LocalDateTime cutOffTime = LocalDateTime.now().minusHours(6);
+        return (player.getLastUpdated() == null || player.getLastUpdated().isBefore(cutOffTime));
 
     }
 }
