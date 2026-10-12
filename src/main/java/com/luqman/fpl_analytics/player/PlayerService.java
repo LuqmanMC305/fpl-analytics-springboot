@@ -72,30 +72,12 @@ public class PlayerService {
             MISSING OR STALE PLAYER ATTRIBUTE DATA
             FETCH FROM API -> UPDATE & SAVE THE ENTITY -> RETURN API RESULT
             */
-
             PlayerDto player = findPlayerInApi(name);
             if (player == null) return null;
-            
 
-            // MOVE THIS TO HELPER FUNCTION: refreshAndSavePlayer
-            Player entity = playerRepository.findByFplId(player.getId())
-                .orElseGet(Player::new);
+            refreshAndSavePlayer(player);
 
-            entity.setFplId(player.getId());
-            entity.setWebName(player.getWebName());
-            entity.setTeamName(player.getTeamName());
-            //entity.setPosition(player.getPosition());
-            entity.setTotalPoints(player.getTotalPoints());
-            entity.setNowCost(player.getNowCost());
-            entity.setGoalsScored(player.getGoalsScored());
-            entity.setAssists(player.getAssists());
-            entity.setSelectedByPercent(
-                player.getSelectedByPercent() == null
-                ? null
-                : new BigDecimal(player.getSelectedByPercent())
-            );
-
-            Player savedPlayer = playerRepository.save(entity);
+            Player savedPlayer = playerRepository.save(refreshAndSavePlayer(player));
             log.info("Saved Player '{}' with FPL ID: {}", 
                 savedPlayer.getWebName(), savedPlayer.getFplId());
 
@@ -122,7 +104,21 @@ public class PlayerService {
 
     // Helper method to refresh & save player to DB
     private Player refreshAndSavePlayer(PlayerDto dto){
+         Player entity = playerRepository.findByFplId(dto.getId())
+                .orElseGet(Player::new);
 
+            entity.setFplId(dto.getId());
+            entity.setWebName(dto.getWebName());
+            entity.setTeamName(dto.getTeamName());
+            //entity.setPosition(player.getPosition());
+            entity.setTotalPoints(dto.getTotalPoints());
+            entity.setNowCost(dto.getNowCost());
+            entity.setGoalsScored(dto.getGoalsScored());
+            entity.setAssists(dto.getAssists());
+            entity.setSelectedByPercent(new BigDecimal(dto.getSelectedByPercent()));
+            
+            return entity;
+            
     }
 
     private PlayerDto findPlayerInApi(String name){
