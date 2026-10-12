@@ -62,9 +62,17 @@ public class PlayerService {
             */
             if(cachedPlayer.isPresent())
             {
-                 log.info("Player '{}' found in cache! ", name);
-                    
-                return toPlayerDto(cachedPlayer.get());
+                log.info("Player '{}' found in cache! ", name);
+
+                if (!isPlayerDataStale(cachedPlayer.get()) &&
+                    cachedPlayer.get().getSelectedByPercent() != null){
+                         log.info("Player '{}' has fresh data!", name);
+                         return toPlayerDto(cachedPlayer.get());
+                    }
+                else{
+                        log.info("Player '{}' has stale data!", name);
+                        
+                }
             }
             else{
                 log.info("Player '{}' not found in cache! ", name);
