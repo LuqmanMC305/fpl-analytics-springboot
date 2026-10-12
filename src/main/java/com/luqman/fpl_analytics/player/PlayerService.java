@@ -68,13 +68,11 @@ public class PlayerService {
                 log.info("Player '{}' not found in cache! ", name);
             }
 
-            /*
-            MISSING OR STALE PLAYER ATTRIBUTE DATA
-            FETCH FROM API -> UPDATE & SAVE THE ENTITY -> RETURN API RESULT
-            */
+            // If the player data is stale
             PlayerDto player = findPlayerInApi(name);
             if (player == null) return null;
-
+            
+            // Call the helper function
             refreshAndSavePlayer(player);
 
             Player savedPlayer = playerRepository.save(refreshAndSavePlayer(player));
@@ -95,7 +93,6 @@ public class PlayerService {
         dto.setNowCost(player.getNowCost());
         dto.setGoalsScored(player.getGoalsScored());
         dto.setAssists(player.getAssists());
-        // WILL CONVERT THIS TO STRING
         dto.setSelectedByPercent(String.valueOf(player.getSelectedByPercent()));
 
 
@@ -110,12 +107,15 @@ public class PlayerService {
             entity.setFplId(dto.getId());
             entity.setWebName(dto.getWebName());
             entity.setTeamName(dto.getTeamName());
-            //entity.setPosition(player.getPosition());
             entity.setTotalPoints(dto.getTotalPoints());
             entity.setNowCost(dto.getNowCost());
             entity.setGoalsScored(dto.getGoalsScored());
             entity.setAssists(dto.getAssists());
             entity.setSelectedByPercent(new BigDecimal(dto.getSelectedByPercent()));
+            /*
+                FOR FUTURE PLAYER FIELDS
+                entity.setPosition(player.getPosition());
+            */
             
             return entity;
             
