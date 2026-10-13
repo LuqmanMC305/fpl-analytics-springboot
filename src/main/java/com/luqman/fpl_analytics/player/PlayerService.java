@@ -74,10 +74,6 @@ public class PlayerService {
             // Call the helper function
             refreshAndSavePlayer(player);
 
-            Player savedPlayer = playerRepository.save(refreshAndSavePlayer(player));
-            log.info("Saved Player '{}' with FPL ID: {}", 
-                savedPlayer.getWebName(), savedPlayer.getFplId());
-
             return player;
     }
 
@@ -99,7 +95,7 @@ public class PlayerService {
     }
 
     // Helper method to refresh & save player to DB
-    private Player refreshAndSavePlayer(PlayerDto dto){
+    private void refreshAndSavePlayer(PlayerDto dto){
          Player entity = playerRepository.findByFplId(dto.getId())
                 .orElseGet(Player::new);
 
@@ -116,8 +112,9 @@ public class PlayerService {
                 FOR FUTURE PLAYER FIELDS
                 entity.setPosition(player.getPosition());
             */
-            
-            return entity;
+
+            log.info("Saved Player '{}' with FPL ID: {}", 
+                entity.getWebName(), entity.getFplId());
             
     }
 
