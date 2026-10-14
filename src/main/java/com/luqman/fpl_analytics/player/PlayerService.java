@@ -111,9 +111,11 @@ public class PlayerService {
             /*
                 FOR FUTURE PLAYER FIELDS
                 entity.setPosition(player.getPosition());
-            */
+            */   
+            
+            playerRepository.save(entity);
 
-            log.info("Saved Player '{}' with FPL ID: {}", 
+            log.info("Saved Player '{}' with FPL ID: {} to DB", 
                 entity.getWebName(), entity.getFplId());
             
     }
