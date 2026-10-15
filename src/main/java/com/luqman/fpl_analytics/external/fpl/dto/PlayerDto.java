@@ -21,6 +21,9 @@ public class PlayerDto {
     @JsonProperty("first_name")
     private String firstName;
 
+    @JsonProperty("second_name")
+    private String secondName;
+
     private Integer team;
 
     @JsonProperty ("team_name")
