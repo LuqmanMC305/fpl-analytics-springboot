@@ -108,6 +108,7 @@ public class PlayerService {
             entity.setAssists(dto.getAssists());
             entity.setSelectedByPercent(new BigDecimal(dto.getSelectedByPercent()));
             entity.setLastUpdated(LocalDateTime.now());
+            entity.setFirstName(dto.getFirstName());
             /*
                 FOR FUTURE PLAYER FIELDS
                 entity.setPosition(player.getPosition());
