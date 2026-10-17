@@ -28,6 +28,10 @@ public class Player{
 
     private String teamName;
 
+    private String firstName;
+
+    private String secondName;
+
     private String position;
 
     private Integer totalPoints;
