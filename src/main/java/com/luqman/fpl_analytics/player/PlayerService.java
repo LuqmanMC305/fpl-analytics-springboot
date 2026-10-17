@@ -89,6 +89,7 @@ public class PlayerService {
         dto.setGoalsScored(player.getGoalsScored());
         dto.setAssists(player.getAssists());
         dto.setSelectedByPercent(String.valueOf(player.getSelectedByPercent()));
+        dto.setFirstName(player.getFirstName());
 
 
         return dto;
