@@ -27,7 +27,7 @@
         <div th:if="${player}" class="mt-8 border-t pt-6 text-center">
 
             <h2 class="text-2xl font-bold text-white text-center details-player-webname"
-                th:text="${player.webName}">
+                th:text="|${player.firstName} ${player.webName}|">
             </h2>
 
              <h4 class="text-lg font-bold mt-2 text-white text-center"
