@@ -10,5 +10,9 @@ public class TeamDto {
 
     private Integer id;
 
+    private Integer code;
+    
     private String name;
+
+
 }
