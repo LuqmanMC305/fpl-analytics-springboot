@@ -47,5 +47,8 @@ public class PlayerDto {
     @JsonProperty("form")
     private String form;
 
+    @JsonProperty("team_badge_url")
+    private String teamBadgeUrl;
+
 
 }
