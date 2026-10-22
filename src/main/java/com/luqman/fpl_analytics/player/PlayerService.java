@@ -159,10 +159,22 @@ public class PlayerService {
                 return null;
             }
             
-            // Get player's team ID
-                player.setTeamName(
-                    teamMap.get(player.getTeam())); // Find the team's name from map
-            
+            // Retrieve the player's team using its FPL team ID
+            TeamDto team = teamMap.get(player.getTeam());
+
+            if(team != null){
+                // Set player's team name
+                player.setTeamName(team.getName());
+
+                 // Generate the team's badge URL
+                if(team.getCode() != null){
+                    player.setTeamBadgeUrl(
+                        "https://resources.premierleague.com/premierleague/badges/70/t"
+                        + team.getCode() + ".png"
+                    );
+                }
+            }
+
             return player;
     }
 
