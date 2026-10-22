@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import java.util.function.Function;
+
 
 @Service
 public class PlayerService {
@@ -135,12 +137,12 @@ public class PlayerService {
             }
 
              // Convert team list into a map for fast team ID -> team name lookup.
-           Map<Integer, String> teamMap = 
+           Map<Integer, TeamDto> teamMap = 
                 response.getTeams()
                         .stream()
                         .collect(Collectors.toMap(
                             TeamDto::getId, 
-                            TeamDto::getName,
+                            Function.identity(),
                             (oldValue, newValue) -> oldValue // prevents duplicates, using parameter names of lambda expression
                         ));
 
