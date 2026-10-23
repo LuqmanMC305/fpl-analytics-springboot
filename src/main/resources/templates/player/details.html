@@ -30,6 +30,13 @@
                 th:text="|${player.firstName} ${player.webName}|">
             </h2>
 
+            <!-- Player's Club Badge -->
+            <img th:if="${player.teamBadgeUrl != null}"
+                    th:src="${player.teamBadgeUrl}"
+                    th:alt="${player.teamName + ' badge'}"
+                    class="w-16 h-16 object-contain mx-auto"
+            />
+
              <h4 class="text-lg font-bold mt-2 text-white text-center"
                 th:text="${player.teamName}">
             </h4>
@@ -59,12 +66,6 @@
                     Ownership:
                     <span th:text="${player.selectedByPercent}"></span>%
                 </p>
-
-                <img th:if="${player.teamBadgeUrl != null}"
-                    th:src="${player.teamBadgeUrl}"
-                    th:alt="${player.teamName + ' badge'}"
-                    class="w-16 h-16 object-contain mx-auto"
-                />
 
             </div>
 
