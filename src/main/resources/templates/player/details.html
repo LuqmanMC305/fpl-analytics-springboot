@@ -60,6 +60,12 @@
                     <span th:text="${player.selectedByPercent}"></span>%
                 </p>
 
+                <img th:if="${player.teamBadgeUrl != null}"
+                    th:src="${player.teamBadgeUrl}"
+                    th:alt="${player.teamName + ' badge'}"
+                    class="w-16 h-16 object-contain mx-auto"
+                />
+
             </div>
 
         </div>
