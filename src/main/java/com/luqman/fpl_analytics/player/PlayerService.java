@@ -175,6 +175,10 @@ public class PlayerService {
                 }
             }
 
+            String badge  = player.getTeamBadgeUrl();
+            log.info("Saved Player '{}' with badge url {}", 
+                player.getWebName(), badge);
+
             return player;
     }
 
