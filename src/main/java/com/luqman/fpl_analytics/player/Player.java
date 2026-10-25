@@ -11,6 +11,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.luqman.fpl_analytics.team.Team;
+
 @Entity
 @Getter
 @Setter
@@ -27,6 +29,11 @@ public class Player{
     private String webName;
 
     private String teamName;
+
+    //Many-to-one relationship with the Team entity
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     private String firstName;
 
