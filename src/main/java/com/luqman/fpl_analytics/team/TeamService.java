@@ -4,9 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.luqman.fpl_analytics.external.FplApiClient;
 import com.luqman.fpl_analytics.external.fpl.dto.BootstrapResponse;
-import com.luqman.fpl_analytics.player.PlayerRepository;
-
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
