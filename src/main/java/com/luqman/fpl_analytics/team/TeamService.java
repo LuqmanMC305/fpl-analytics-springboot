@@ -11,15 +11,14 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor 
 public class TeamService {
 
     private final TeamRepository teamRepository;
     private final FplApiClient fplApiClient;
 
-    public TeamService(FplApiClient fplApiClient, TeamRepository teamRepository) {
-        this.fplApiClient = fplApiClient;
+    public TeamService(TeamRepository teamRepository, FplApiClient fplApiClient) {
         this.teamRepository = teamRepository;
+        this.fplApiClient = fplApiClient;
     }
 
     public void syncTeams(){
