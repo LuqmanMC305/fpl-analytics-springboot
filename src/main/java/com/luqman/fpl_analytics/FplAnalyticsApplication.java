@@ -13,12 +13,13 @@ public class FplAnalyticsApplication {
 		SpringApplication.run(FplAnalyticsApplication.class, args);
 	}
 
-	//Runs the syncTeams method automatically
+	/*Runs the syncTeams method automatically
 	@Bean
 	CommandLineRunner populateTeams(TeamService teamService){
 		return args -> {
 			teamService.syncTeams();
 		};
 	}
+	*/
 
 }
