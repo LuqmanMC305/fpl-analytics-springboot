@@ -13,6 +13,9 @@ import com.luqman.fpl_analytics.external.FplApiClient;
 import com.luqman.fpl_analytics.external.fpl.dto.BootstrapResponse;
 import com.luqman.fpl_analytics.external.fpl.dto.PlayerDto;
 import com.luqman.fpl_analytics.external.fpl.dto.TeamDto;
+import com.luqman.fpl_analytics.team.Team;
+import com.luqman.fpl_analytics.team.TeamRepository;
+
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +33,16 @@ import java.util.function.Function;
 public class PlayerService {
 
        private final PlayerRepository playerRepository;
+       private final TeamRepository teamRepository;
        private final FplApiClient fplApiClient;
 
         private static final Logger log = 
             LoggerFactory.getLogger(PlayerService.class);
 
-       public PlayerService(FplApiClient fplApiClient, PlayerRepository playerRepository) {
+       public PlayerService(FplApiClient fplApiClient, PlayerRepository playerRepository, TeamRepository teamRepository) {
         this.fplApiClient = fplApiClient;
         this.playerRepository = playerRepository;
+        this.teamRepository = teamRepository;
     }
     
         public PlayerDto findPlayer(String name){
@@ -99,28 +104,41 @@ public class PlayerService {
 
     // Helper method to refresh & save player to DB
     private void refreshAndSavePlayer(PlayerDto dto){
-         Player entity = playerRepository.findByFplId(dto.getId())
+         Player playerEntity = playerRepository.findByFplId(dto.getId())
                 .orElseGet(Player::new);
 
-            entity.setFplId(dto.getId());
-            entity.setWebName(dto.getWebName());
-            entity.setTeamName(dto.getTeamName());
-            entity.setTotalPoints(dto.getTotalPoints());
-            entity.setNowCost(dto.getNowCost());
-            entity.setGoalsScored(dto.getGoalsScored());
-            entity.setAssists(dto.getAssists());
-            entity.setSelectedByPercent(new BigDecimal(dto.getSelectedByPercent()));
-            entity.setLastUpdated(LocalDateTime.now());
-            entity.setFirstName(dto.getFirstName());
+            playerEntity.setFplId(dto.getId());
+            playerEntity.setWebName(dto.getWebName());
+            playerEntity.setTeamName(dto.getTeamName());
+            playerEntity.setTotalPoints(dto.getTotalPoints());
+            playerEntity.setNowCost(dto.getNowCost());
+            playerEntity.setGoalsScored(dto.getGoalsScored());
+            playerEntity.setAssists(dto.getAssists());
+            playerEntity.setSelectedByPercent(new BigDecimal(dto.getSelectedByPercent()));
+            playerEntity.setLastUpdated(LocalDateTime.now());
+            playerEntity.setFirstName(dto.getFirstName());
             /*
                 FOR FUTURE PLAYER FIELDS
-                entity.setPosition(player.getPosition());
-            */   
+                playerEntity.setPosition(player.getPosition());
+            */
+
+            // Get team ID in playerDto
+            Integer teamId = dto.getTeam();
+
+            // Retrieve the corresponding Team entity
+            Team teamEntity = teamRepository.findById(teamId)
+                    .orElseThrow(() ->
+                        new IllegalArgumentException("Team not found: " + teamId)
+                    );
+
+            // Associate the player with his team
+            playerEntity.setTeam(teamEntity);
             
-            playerRepository.save(entity);
+            
+            playerRepository.save(playerEntity);
 
             log.info("Saved Player '{}' with FPL ID: {} to DB", 
-                entity.getWebName(), entity.getFplId());
+                playerEntity.getWebName(), playerEntity.getFplId());
             
     }
 
