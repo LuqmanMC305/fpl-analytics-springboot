@@ -134,6 +134,8 @@ public class PlayerService {
             // Associate the player with his team
             playerEntity.setTeam(teamEntity);
             
+            log.info("Saved Player '{}' from {} to DB", 
+                playerEntity.getWebName(), playerEntity.getTeam());
             
             playerRepository.save(playerEntity);
 
