@@ -86,20 +86,30 @@ public class PlayerService {
 
     // Helper method to convert from Player to PlayerDTO
     private PlayerDto toPlayerDto(Player player){
-        PlayerDto dto = new PlayerDto();
+        PlayerDto playerDto = new PlayerDto();
 
-        dto.setWebName(player.getWebName());
-        dto.setTeamName(player.getTeamName());
-        dto.setTotalPoints(player.getTotalPoints());
-        dto.setTotalPoints(player.getTotalPoints());
-        dto.setNowCost(player.getNowCost());
-        dto.setGoalsScored(player.getGoalsScored());
-        dto.setAssists(player.getAssists());
-        dto.setSelectedByPercent(String.valueOf(player.getSelectedByPercent()));
-        dto.setFirstName(player.getFirstName());
+        playerDto.setWebName(player.getWebName());
+        playerDto.setTeamName(player.getTeamName());
+        playerDto.setTotalPoints(player.getTotalPoints());
+        playerDto.setTotalPoints(player.getTotalPoints());
+        playerDto.setNowCost(player.getNowCost());
+        playerDto.setGoalsScored(player.getGoalsScored());
+        playerDto.setAssists(player.getAssists());
+        playerDto.setSelectedByPercent(String.valueOf(player.getSelectedByPercent()));
+        playerDto.setFirstName(player.getFirstName());
 
+        // Retrieve URL from cached data in Teams table
+        Team team = player.getTeam();
 
-        return dto;
+        playerDto.setTeam(team.getId());
+
+        // Generate the team's badge URL
+         playerDto.setTeamBadgeUrl(
+                        "https://resources.premierleague.com/premierleague/badges/70/t"
+                        + team.getCode() + ".png"
+        );
+
+        return playerDto;
     }
 
     // Helper method to refresh & save player to DB
