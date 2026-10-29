@@ -109,6 +109,10 @@ public class PlayerService {
                         + team.getCode() + ".png"
         );
 
+        String badge  = playerDto.getTeamBadgeUrl();
+            log.info("Saved Player '{}' with badge url {}", 
+                player.getWebName(), badge);
+
         return playerDto;
     }
 
